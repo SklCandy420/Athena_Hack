@@ -1,8 +1,8 @@
+import 'package:athena_hack/api/firebase.dart';
+import 'package:athena_hack/api/pdf_api.dart';
+import 'package:athena_hack/main.dart';
+import 'package:athena_hack/widget/button_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:generate_pdf_invoice_example/api/firebase.dart';
-import 'package:generate_pdf_invoice_example/api/pdf_api.dart';
-import 'package:generate_pdf_invoice_example/main.dart';
-import 'package:generate_pdf_invoice_example/widget/button_widget.dart';
 
 class ClearedInvoicesPage extends StatefulWidget {
   @override
