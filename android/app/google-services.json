@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "171840565870",
+    "project_id": "athenahack-ca410",
+    "storage_bucket": "athenahack-ca410.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171840565870:android:0ef6b9b44c28819bb4ac7f",
+        "android_client_info": {
+          "package_name": "com.example.athena_hack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171840565870-bk57qv08i6bsf8nu7l19n5a6no53mv39.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.athena_hack",
+            "certificate_hash": "4fe16d421fe2f2d931c3df47900e5ef007ca3531"
+          }
+        },
+        {
+          "client_id": "171840565870-l39eup265mjjisk7lr8bokgq46l5m0ej.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcX-yYZIBzQ6axzEAbRJNh3SmvUi-at4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171840565870-l39eup265mjjisk7lr8bokgq46l5m0ej.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
