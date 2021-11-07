@@ -9,8 +9,6 @@ import 'package:athena_hack/model/supplier.dart';
 import 'package:athena_hack/widget/button_widget.dart';
 import 'package:athena_hack/widget/title_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server.dart';
 
 class PdfPage extends StatefulWidget {
   @override
@@ -351,31 +349,4 @@ class _PdfPageState extends State<PdfPage> {
           ),
         ),
       );
-  Future<void> sendEmail() async {
-    final email = 'raza999syed@gmail.com';
-    final token = '';
-    final smtpServer = gmailRelaySaslXoauth2(email, token);
-    final message = Message()
-      ..from = Address(email, 'Raza')
-      ..recipients = ['raza999syed@gmail.com']
-      ..subject = 'Hello World!!'
-      ..text = 'This is a test email';
-    try {
-      await send(message, smtpServer);
-    } on MailerException catch (e) {
-      print(e.toString());
-    }
-  }
-
-  void showSnackBar(String text) {
-    final snackBar = SnackBar(
-        content: Text(
-          text,
-          style: TextStyle(fontSize: 20),
-        ),
-        backgroundColor: Colors.green);
-    ScaffoldMessenger.of(context)
-      ..removeCurrentSnackBar()
-      ..showSnackBar(snackBar);
-  }
 }
