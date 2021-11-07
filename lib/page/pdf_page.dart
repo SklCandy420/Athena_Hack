@@ -1,14 +1,16 @@
-import 'dart:io';
-import 'package:athena_hack/api/firebase.dart';
-import 'package:athena_hack/api/pdf_api.dart';
-import 'package:athena_hack/api/pdf_invoice_api.dart';
-import 'package:athena_hack/main.dart';
-import 'package:athena_hack/model/customer.dart';
-import 'package:athena_hack/model/invoice.dart';
-import 'package:athena_hack/model/supplier.dart';
-import 'package:athena_hack/widget/button_widget.dart';
-import 'package:athena_hack/widget/title_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:generate_pdf_invoice_example/api/firebase.dart';
+import 'package:generate_pdf_invoice_example/api/pdf_api.dart';
+import 'package:generate_pdf_invoice_example/api/pdf_invoice_api.dart';
+import 'package:generate_pdf_invoice_example/main.dart';
+import 'package:generate_pdf_invoice_example/model/customer.dart';
+import 'package:generate_pdf_invoice_example/model/invoice.dart';
+import 'package:generate_pdf_invoice_example/model/supplier.dart';
+import 'package:generate_pdf_invoice_example/widget/button_widget.dart';
+import 'package:generate_pdf_invoice_example/widget/title_widget.dart';
+import 'dart:io';
+
+import 'package:url_launcher/url_launcher.dart';
 
 class PdfPage extends StatefulWidget {
   @override
@@ -19,7 +21,7 @@ class _PdfPageState extends State<PdfPage> {
   String sName = '';
   String sAddr = '';
   String sPaym = '';
-  String sEmail = '';
+  String sEmil = '';
   String cName = '';
   String cAddr = '';
   String cEmil = '';
@@ -30,13 +32,9 @@ class _PdfPageState extends State<PdfPage> {
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.black,
         floatingActionButton: FloatingActionButton(
-          child: Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            invItems.add(InvoiceItem(
-                description: '', quantity: 0, gst: 0.0, unitPrice: 0.0));
+          child: Icon(Icons.add, color: Colors.white,),
+          onPressed: (){
+            invItems.add(InvoiceItem(description: '', quantity: 0, gst: 0.0, unitPrice: 0.0));
             setState(() {});
           },
         ),
@@ -51,253 +49,132 @@ class _PdfPageState extends State<PdfPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 TitleWidget(
-                  text: 'Supplier Info.',
-                ),
-                SizedBox(
-                  height: 5,
+                  text: 'Supplier Info',
                 ),
                 Row(
                   children: [
-                    Expanded(
-                        child: TextField(
-                      decoration: InputDecoration(
-                          labelText: 'Name',
-                          labelStyle: TextStyle(color: Colors.white),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white))),
+                    Expanded(child: TextField(
+                      decoration: InputDecoration(labelText: 'Name', labelStyle: TextStyle(color: Colors.white), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white))),
                       style: TextStyle(color: Colors.white),
-                      onChanged: (val) {
-                        sName = val;
-                      },
+                      onChanged: (val){sName = val;},
                     )),
                   ],
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                SizedBox(height: 5,),
                 Row(
                   children: [
-                    Expanded(
-                        child: TextField(
-                      decoration: InputDecoration(
-                          labelText: 'Address',
-                          labelStyle: TextStyle(color: Colors.white),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white))),
+                    Expanded(child: TextField(
+                      decoration: InputDecoration(labelText: 'Address', labelStyle: TextStyle(color: Colors.white), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white))),
                       style: TextStyle(color: Colors.white),
-                      onChanged: (val) {
-                        sAddr = val;
-                      },
+                      onChanged: (val){sAddr = val;},
                     )),
                   ],
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                SizedBox(height: 5,),
                 Row(
                   children: [
-                    Expanded(
-                        child: TextField(
-                      decoration: InputDecoration(
-                          labelText: 'Payment Info.',
-                          labelStyle: TextStyle(color: Colors.white),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white))),
+                    Expanded(child: TextField(
+                      decoration: InputDecoration(labelText: 'Payment Info', labelStyle: TextStyle(color: Colors.white), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white))),
                       style: TextStyle(color: Colors.white),
-                      onChanged: (val) {
-                        sPaym = val;
-                      },
+                      onChanged: (val){sPaym = val;},
                     )),
                   ],
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                SizedBox(height: 5,),
                 Row(
                   children: [
-                    Expanded(
-                        child: TextField(
-                      decoration: InputDecoration(
-                          labelText: 'Email Address',
-                          labelStyle: TextStyle(color: Colors.white),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white))),
+                    Expanded(child: TextField(
+                      decoration: InputDecoration(labelText: 'Email Address', labelStyle: TextStyle(color: Colors.white), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white))),
                       style: TextStyle(color: Colors.white),
-                      onChanged: (val) {
-                        sEmail = val;
-                      },
+                      onChanged: (val){sEmil = val;},
                     )),
                   ],
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                SizedBox(height: 5,),
                 TitleWidget(
-                  text: 'Customer Info.',
-                ),
-                SizedBox(
-                  height: 5,
+                  text: 'Customer Info',
                 ),
                 Row(
                   children: [
-                    Expanded(
-                        child: TextField(
-                      decoration: InputDecoration(
-                          labelText: 'Name',
-                          labelStyle: TextStyle(color: Colors.white),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white))),
+                    Expanded(child: TextField(
+                      decoration: InputDecoration(labelText: 'Name', labelStyle: TextStyle(color: Colors.white), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white))),
                       style: TextStyle(color: Colors.white),
-                      onChanged: (val) {
-                        cName = val;
-                      },
+                      onChanged: (val){cName = val;},
                     )),
                   ],
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                SizedBox(height: 5,),
                 Row(
                   children: [
-                    Expanded(
-                        child: TextField(
-                      decoration: InputDecoration(
-                          labelText: 'Address',
-                          labelStyle: TextStyle(color: Colors.white),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white))),
+                    Expanded(child: TextField(
+                      decoration: InputDecoration(labelText: 'Address', labelStyle: TextStyle(color: Colors.white), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white))),
                       style: TextStyle(color: Colors.white),
-                      onChanged: (val) {
-                        cAddr = val;
-                      },
+                      onChanged: (val){cAddr = val;},
                     )),
                   ],
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                SizedBox(height: 5,),
                 Row(
                   children: [
-                    Expanded(
-                        child: TextField(
-                      decoration: InputDecoration(
-                          labelText: 'Email Address',
-                          labelStyle: TextStyle(color: Colors.white),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white))),
+                    Expanded(child: TextField(
+                      decoration: InputDecoration(labelText: 'Email Address', labelStyle: TextStyle(color: Colors.white), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white))),
                       style: TextStyle(color: Colors.white),
-                      onChanged: (val) {
-                        cEmil = val;
-                      },
+                      onChanged: (val){cEmil = val;},
                     )),
                   ],
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                SizedBox(height: 5,),
                 TitleWidget(
                   text: 'Invoice Items',
                 ),
-                ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: invItems.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Item No. " + (index + 1).toString() + " : ",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Container(
-                            height: 250,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                      child: TextField(
-                                    decoration: InputDecoration(
-                                        labelText: 'Description',
-                                        labelStyle:
-                                            TextStyle(color: Colors.white),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.white))),
-                                    style: TextStyle(color: Colors.white),
-                                    onChanged: (val) {
-                                      invItems[index].description = val;
-                                    },
-                                  )),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Expanded(
-                                      child: TextField(
-                                    keyboardType: TextInputType.number,
-                                    decoration: InputDecoration(
-                                        labelText: 'Quantity',
-                                        labelStyle:
-                                            TextStyle(color: Colors.white),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.white))),
-                                    style: TextStyle(color: Colors.white),
-                                    onChanged: (val) {
-                                      invItems[index].quantity = int.parse(val);
-                                    },
-                                  )),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Expanded(
-                                      child: TextField(
-                                    keyboardType: TextInputType.number,
-                                    decoration: InputDecoration(
-                                        labelText: 'Unit Price',
-                                        labelStyle:
-                                            TextStyle(color: Colors.white),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.white))),
-                                    style: TextStyle(color: Colors.white),
-                                    onChanged: (val) {
-                                      invItems[index].unitPrice =
-                                          double.parse(val);
-                                    },
-                                  )),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Expanded(
-                                      child: TextField(
-                                    keyboardType: TextInputType.number,
-                                    decoration: InputDecoration(
-                                        labelText: 'GST',
-                                        labelStyle:
-                                            TextStyle(color: Colors.white),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.white))),
-                                    style: TextStyle(color: Colors.white),
-                                    onChanged: (val) {
-                                      invItems[index].gst = double.parse(val);
-                                    },
-                                  )),
-                                ],
-                              ),
+                ListView.builder(physics: NeverScrollableScrollPhysics(), shrinkWrap: true, itemCount: invItems.length, itemBuilder: (context, index){
+                  return Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Item No " + (index + 1).toString() + " : ", style: TextStyle(color: Colors.white),),
+                        Container(
+                          height: 250,
+                          decoration: BoxDecoration(border: Border.all(color: Colors.white)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Column(
+                              children: [
+                                Expanded(child: TextField(
+                                  decoration: InputDecoration(labelText: 'Description', labelStyle: TextStyle(color: Colors.white), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white))),
+                                  style: TextStyle(color: Colors.white),
+                                  onChanged: (val){invItems[index].description = val;},
+                                )),
+                                SizedBox(height: 5,),
+                                Expanded(child: TextField(
+                                  keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(labelText: 'Quantity', labelStyle: TextStyle(color: Colors.white), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white))),
+                                  style: TextStyle(color: Colors.white),
+                                  onChanged: (val){invItems[index].quantity = int.parse(val);},
+                                )),
+                                SizedBox(height: 5,),
+                                Expanded(child: TextField(
+                                  keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(labelText: 'Unit Price', labelStyle: TextStyle(color: Colors.white), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white))),
+                                  style: TextStyle(color: Colors.white),
+                                  onChanged: (val){invItems[index].unitPrice = double.parse(val);},
+                                )),
+                                SizedBox(height: 5,),
+                                Expanded(child: TextField(
+                                  keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(labelText: 'GST', labelStyle: TextStyle(color: Colors.white), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white))),
+                                  style: TextStyle(color: Colors.white),
+                                  onChanged: (val){invItems[index].gst = double.parse(val);},
+                                )),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                        ),
+                      ],
+                    ),
+                  );
+                },),
                 Center(
                   child: ButtonWidget(
                     text: 'Invoice PDF',
@@ -310,7 +187,7 @@ class _PdfPageState extends State<PdfPage> {
                           name: sName,
                           address: sAddr,
                           paymentInfo: sPaym,
-                          emailAddress: sEmail,
+                          emailAddress: sEmil,
                         ),
                         customer: Customer(
                           name: cName,
@@ -334,12 +211,15 @@ class _PdfPageState extends State<PdfPage> {
                 Center(
                   child: ButtonWidget(
                     text: 'Mail Invoice',
-                    onClicked: () {
+                    onClicked: () async {
                       print("HERE");
-                      if (pdfFile == null) {
+                      if (pdfFile == null){
                         print("PDF NULL");
-                      } else {
-                        ds.addInvoice(cName, dueDate, pdfFile!);
+                      }
+                      else{
+                        String link = await DS.addInvoice(cName, dueDate, pdfFile!);
+                        String url = 'mailto:' + cEmil + '?subject=Invoice from ' + sName + '&body=Please find the latest invoice at ' + link;
+                        await canLaunch(url)? await launch(url) : print("error launching url");
                       }
                     },
                   ),
