@@ -24,12 +24,12 @@ A new Flutter project created by our team **ASCII101** during ATHENAHACK.
 
 
 **Some Screenshots:**\
-    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss1" height="100" width="20">
-    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss2" height="100" width="20">
-    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss3" height="100" width="20">
-    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss4" height="100" width="20">
-    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss5" height="100" width="20">
-    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss6" height="100" width="20">
+    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss1.jpg" height="100" width="50">
+    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss2.jpg" height="100" width="50">
+    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss3.jpg" height="100" width="50">
+    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss4.jpg" height="100" width="50">
+    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss5.jpg" height="100" width="50">
+    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss6.jpg" height="100" width="50">
 
 **Presentation Link:**\
     - [Presentation](https://docs.google.com/presentation/d/19_yBAu8rmiWYGM4KKtSX-XbPjtffo2BDWNlMQaviepg/edit#slide=id.g35f391192_00)
