@@ -24,11 +24,11 @@ A new Flutter project created by our team **ASCII101** during ATHENAHACK.
 
 
 **Some Screenshots:**\
-    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss1.jpg" height="100" width="50">
-    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss2.jpg" height="100" width="50">
-    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss3.jpg" height="100" width="50">
-    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss4.jpg" height="100" width="50">
-    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss5.jpg" height="100" width="50">
+    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss1.jpg" height="300" width="200"><br>
+    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss2.jpg" height="300" width="200"><br>
+    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss3.jpg" height="300" width="200"><br>
+    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss4.jpg" height="300" width="200"><br>
+    <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss5.jpg" height="300" width="200"><br>
     <img src="https://github.com/SklCandy420/Athena_Hack/blob/master/assets/ss6.jpg" height="100" width="50">
 
 **Presentation Link:**\
