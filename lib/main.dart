@@ -1,4 +1,4 @@
-import 'package:athena_hack/page/homepage.dart';
+import 'package:athena_hack/page/intro/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,13 +16,13 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  static final String title = 'Invoice';
+  static final String title = 'INVOMAN';
 
   @override
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: title,
         theme: ThemeData(primarySwatch: Colors.deepOrange),
-        home: Homepage(),
+        home: SplashScreen(),
       );
 }

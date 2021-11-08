@@ -1,6 +1,6 @@
 import 'package:athena_hack/main.dart';
 import 'package:athena_hack/page/clearedInvoicesPage.dart';
-import 'package:athena_hack/page/pdf_page.dart';
+import 'package:athena_hack/page/pdfPage.dart';
 import 'package:athena_hack/page/pendingInvoicesPage.dart';
 import 'package:athena_hack/widget/button_widget.dart';
 import 'package:athena_hack/widget/title_widget.dart';
@@ -27,7 +27,7 @@ class _HomepageState extends State<Homepage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TitleImageWidget(
-                icon: Icons.picture_as_pdf_rounded, text: "Invoice app"),
+                icon: Icons.picture_as_pdf_rounded, text: "Invoice App"),
             ButtonWidget(
                 text: "New Invoice",
                 onClicked: () {
@@ -43,7 +43,7 @@ class _HomepageState extends State<Homepage> {
                           builder: (context) => ClearedInvoicesPage()));
                 }),
             ButtonWidget(
-                text: "Pending invoices",
+                text: "Pending Invoices",
                 onClicked: () {
                   Navigator.push(
                       context,

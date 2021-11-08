@@ -1,13 +1,12 @@
 import 'dart:io';
 import 'package:athena_hack/api/firebase.dart';
-import 'package:athena_hack/api/pdf_api.dart';
-import 'package:athena_hack/api/pdf_invoice_api.dart';
+import 'package:athena_hack/api/pdfAPI.dart';
+import 'package:athena_hack/api/pdfInvoiceAPI.dart';
 import 'package:athena_hack/main.dart';
 import 'package:athena_hack/model/customer.dart';
 import 'package:athena_hack/model/invoice.dart';
 import 'package:athena_hack/model/supplier.dart';
 import 'package:athena_hack/widget/button_widget.dart';
-import 'package:athena_hack/widget/title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -20,27 +19,16 @@ class _PdfPageState extends State<PdfPage> {
   String sName = '';
   String sAddr = '';
   String sPaym = '';
-  String sEmil = '';
+  String sEmail = '';
   String cName = '';
   String cAddr = '';
-  String cEmil = '';
+  String cEmail = '';
   File? pdfFile;
   DateTime dueDate = DateTime.now();
   List<InvoiceItem> invItems = [];
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.black,
-        floatingActionButton: FloatingActionButton(
-          child: Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            invItems.add(InvoiceItem(
-                description: '', quantity: 0, gst: 0.0, unitPrice: 0.0));
-            setState(() {});
-          },
-        ),
         appBar: AppBar(
           title: Text(MyApp.title),
           centerTitle: true,
@@ -51,8 +39,15 @@ class _PdfPageState extends State<PdfPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                TitleWidget(
-                  text: 'Supplier Info',
+                Text(
+                  'Supplier Info.',
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 40),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 Row(
                   children: [
@@ -90,14 +85,14 @@ class _PdfPageState extends State<PdfPage> {
                   ],
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 Row(
                   children: [
                     Expanded(
                         child: TextField(
                       decoration: InputDecoration(
-                          labelText: 'Payment Info',
+                          labelText: 'Payment Info.',
                           labelStyle: TextStyle(color: Colors.white),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.white))),
@@ -109,7 +104,7 @@ class _PdfPageState extends State<PdfPage> {
                   ],
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 Row(
                   children: [
@@ -122,16 +117,23 @@ class _PdfPageState extends State<PdfPage> {
                               borderSide: BorderSide(color: Colors.white))),
                       style: TextStyle(color: Colors.white),
                       onChanged: (val) {
-                        sEmil = val;
+                        sEmail = val;
                       },
                     )),
                   ],
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
-                TitleWidget(
-                  text: 'Customer Info',
+                Text(
+                  'Customer Info.',
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 40),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 Row(
                   children: [
@@ -150,7 +152,7 @@ class _PdfPageState extends State<PdfPage> {
                   ],
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 Row(
                   children: [
@@ -169,7 +171,7 @@ class _PdfPageState extends State<PdfPage> {
                   ],
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 Row(
                   children: [
@@ -182,16 +184,48 @@ class _PdfPageState extends State<PdfPage> {
                               borderSide: BorderSide(color: Colors.white))),
                       style: TextStyle(color: Colors.white),
                       onChanged: (val) {
-                        cEmil = val;
+                        cEmail = val;
                       },
                     )),
                   ],
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
-                TitleWidget(
-                  text: 'Invoice Items',
+                Row(
+                  children: [
+                    Text(
+                      'Invoice Items',
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 38),
+                    ),
+                    SizedBox(
+                      width: 6,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        invItems.add(InvoiceItem(
+                            description: '',
+                            quantity: 0,
+                            gst: 0.0,
+                            unitPrice: 0.0));
+                        setState(() {});
+                      },
+                      child: Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        shape: CircleBorder(),
+                        padding: EdgeInsets.all(5),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
@@ -305,12 +339,12 @@ class _PdfPageState extends State<PdfPage> {
                           name: sName,
                           address: sAddr,
                           paymentInfo: sPaym,
-                          emailAddress: sEmil,
+                          emailAddress: sEmail,
                         ),
                         customer: Customer(
                           name: cName,
                           address: cAddr,
-                          emailAddress: cEmil,
+                          emailAddress: cEmail,
                         ),
                         info: InvoiceInfo(
                           date: date,
@@ -337,7 +371,7 @@ class _PdfPageState extends State<PdfPage> {
                         String link =
                             await DS.addInvoice(cName, dueDate, pdfFile!);
                         String url = 'mailto:' +
-                            cEmil +
+                            cEmail +
                             '?subject=Invoice from ' +
                             sName +
                             '&body=Please find the latest invoice at ' +
